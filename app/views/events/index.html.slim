@@ -1,0 +1,37 @@
+- if current_user.admin?
+    .page-header
+      = @current_user.role
+      = link_to new_event_path, class: 'btn btn-primary' do 
+        span.glyphicon.glyphicon-plus
+        |  New Event
+      h1
+        | Listing events
+
+    .table-responsive
+      table.table.table-striped.table-bordered.table-hover
+        thead
+          tr
+            th
+              | State
+            th
+              | User
+            th
+              | Order
+            th
+            th
+            th
+        tbody
+          - @events.each do | event |
+            tr
+              td
+                = event.state
+              td
+                = event.user
+              td
+                = event.order
+              td
+                = link_to 'Show', event
+              td
+                = link_to 'Edit', edit_event_path(event) 
+              td
+                = link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } 

@@ -1,0 +1,33 @@
+- if not @income.blank?
+  .panel.panel-default
+    .panel-heading
+      h3.panel-title
+        b = t(:income_source)
+    .panel-body
+      dl
+        dt
+          = t(:income_source_name)
+        br
+        dd
+          = @income.name
+        br
+        dt
+          = t(:income_project)
+        br
+        dd
+          = @income.project.try(:name)
+        br
+        dt
+          = t(:income_source_description)
+        br
+        dd
+          = @income.description
+        br
+        = link_to t(:income_sources), incomes_path
+        = ' | '
+        = link_to t(:journal), records_path
+
+        - if cfo_treasurer_case?
+          = ' | '
+          = link_to t(:edit), edit_income_path(@income)
+

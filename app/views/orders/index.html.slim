@@ -1,0 +1,206 @@
+- content_for :main_title do
+  div class='main-title-content'
+    = @title
+= link_to new_order_path, class: 'btn btn-primary' do 
+  span.glyphicon.glyphicon-plus
+  = t(:new_order)
+br
+br
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover#order-table.no_scroll
+    thead
+      tr
+        th
+          = t(:created_at)
+        th
+          = t(:purpose)
+        th
+          = t(:ccy)
+        th
+          = t(:amount)
+        th
+          = t(:initiator)
+        th
+          = t(:state)
+        - if cfo_or_treasurer?
+          th
+            = t(:project)
+          th
+            = t(:expenditure)
+        - if controller.action_name == 'executed' && cfo_or_treasurer?
+          th.small-width
+        - if controller.action_name == 'index' || current_user &&              \
+              controller.action_name == 'executed' && cfo_treasurer_case?
+          th
+    tbody
+      - @orders.each do | order |
+        tr
+          td data-order="#{order.created_at}"
+            = set_date(order.created_at, order_path(order.id))
+          - if set_order_color?(order)
+            td.awaiting
+              = set_length(order.subject)
+              - if cfo_treasurer_case?
+                = render partial: 'copy_button', locals: { order: order }
+          - else
+            td
+              = set_length(order.subject)
+              - if cfo_treasurer_case?
+                = render partial: 'copy_button', locals: { order: order }
+          td
+            = order.ccy
+          td.text-right.no_wrap
+            = number_to_currency(order.amount, unit: '', precision: 0)
+          td
+            = order.user.try(:name)
+          td
+            - if allowed_states(order).size > 1
+              = select_tag(:state,                                             \
+                options_for_select(                                            \
+                  allowed_states(order),                                       \
+                  selected: order.state),                                      \
+                  { id: "select_" + order.id.to_s,                             \
+                    onchange: 'showfields("' + (order.state) + '", "' + order.id.to_s + '")' })
+            - else
+              .order_state
+                = order.state
+            small
+              = show_sender(order)
+            = select_tag(:user,                                                \
+                        options_for_select(users_for_verification),            \
+                        { id: "user_" + order.id.to_s,                         \
+                          style: "display: none;",                             \
+                          prompt: t(:recipient_field) })
+          - if cfo_or_treasurer?
+            td
+              = order.project.try(:name)
+            td
+              = order.expenditure.try(:name)
+          - if controller.action_name == 'executed' && cfo_or_treasurer?
+            - if order.handled?
+              td.small-width.red-asterisk
+                = '*'
+            - else
+              td.small-width.green-plus
+                = '+'
+
+          - if controller.action_name == 'index' || current_user &&            \
+                controller.action_name == 'executed' && cfo_treasurer_case?
+            td.text-center
+              = link_to t(:edit), edit_order_path(order) if can_he_edit? order
+              - if order.verification? && order.author?(current_user.id)
+                = link_to t(:withdraw),                                        \
+                          order_path(order.id, withdraw: order.id),            \
+                          method: :put
+
+
+              - if cfo_treasurer_case? && controller.action_name == 'executed'
+                hr.small-margin
+                = link_to t(:send_to_journal),                                 \
+                          order_path(order.id, to_journal: order.id),          \
+                          method: :put
+
+/ Modal
+div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModal2Label"
+  div class="modal-dialog" role="document"
+    div class="modal-content"
+      div class="modal-header"
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true"
+            |&times;
+        h4 class="modal-title" id="modalSelectState"
+
+      div class="modal-body text-center" id="Modal2body"
+
+        form id="modalOrderForm" accept-charset="UTF-8" method="post"
+          input name="utf8" type="hidden" value="✓"
+          input type="hidden" name="_method" value="patch"
+          input type="hidden" name="authenticity_token"
+
+          div id='modalQuestion'
+
+          input id="modalSelectStateInput" type='hidden' name='order[state]'
+
+          div class="form-group" id="modalSelectUser"
+
+          div class="form-group" id="orderNote"
+            label for="order_note"
+              = t(:note)
+            textarea id="order_note" placeholder="#{t(:note_must_be_present)}" name='order[note]' class='form-control' rows='6'
+
+          div class="text-right"
+            input type='submit' name='commit' value="#{t(:save)}" class='btn btn-primary'
+            = "   "
+            button type="button" class="btn btn-default" data-dismiss="modal" id='big_nope'
+              = t(:cancel)
+      div class="modal-footer" id="Modal2footer"
+
+script
+  | $('#order-table').on('click', function(e){ toClipboard(e); });
+  |
+  | function createModal(s, new_state, current_state, translation) {
+  |   if (current_state != '') {
+  |     $('#select_' + s).val(current_state);
+  |   } else {
+  |     $('#select_' + s).val('preparation');
+  |   }
+  |   $('#orderNote').show();
+  |   $('#modalQuestion').empty();
+  |   $('#modalSelectState').empty();
+  |   $('#order_note').val("");
+  |   $('#modalOrderForm').attr('action', '#{orders_path}' + '/' + s);
+  |   $('#modalSelectState').append(translation);
+  |   $('#modalSelectStateInput').val(new_state);
+  |   if (new_state == 'verification') {
+  |     $('#modalSelectUser').empty().append("<label for='modalUsers'>#{t(:recipient)}</label>");
+  |     $('#modalSelectUser').append("<select class='form-control' id='modalUsers' name='order[user]'>");
+  |     var $user_options = $('#user_' + s + ' > option').clone();
+  |     $('#modalUsers').append($user_options);
+  |   } else {
+  |     $('#modalSelectUser').empty();
+  |   }
+  |   if (new_state == 'approval' || new_state == 'executed' || new_state == 'execution') {
+  |
+  |     $('#orderNote').hide();
+  |     $('#modalQuestion').append("<h3>#{t(:change_state)}</h3><br>");
+  |   }
+  |   $('#myModal2').modal('show');
+  | }
+
+  | function showfields(current_state, s) { 
+  |   $('#user_' + s).hide();
+  |   switch ($('#select_' + s).val()) {
+  |     case current_state:
+  |       $('#flash').hide();
+  |       break;
+  |     case "preparation":
+  |       createModal(s, 'preparation', current_state, '#{t(:preparation)}');
+  |       break;
+  |     case "verification": 
+  |       createModal(s, 'verification', current_state, '#{t(:verification)}');
+  |       break;
+  |     case "canceled":
+  |       createModal(s, 'canceled', current_state, '#{t(:canceled)}');
+  |       break;
+  |     case "approval":
+  |       createModal(s, 'approval', current_state, '#{t(:approval)}');
+  |       break;
+  |     case "execution":
+  |       createModal(s, 'execution', current_state, '#{t(:execution)}');
+  |       break; 
+  |     case "executed":
+  |       createModal(s, 'executed', current_state, '#{t(:executed)}');
+  |       break;
+  |     default:
+  |       $('#user_' + s).hide();
+  |   }
+  /|     console.log('#save_' + s);
+  /|     console.log('this.val' + $(this).val());      
+  | }
+
+  |$('#order-table').dataTable({
+  |        "aLengthMenu": [[25, 50, -1], [25, 50, "All"]],
+  |        "iDisplayLength": 25,
+  |        "order": [[0, 'desc']],
+  |        "language": { "url": "#{root_url + '/assets/Russian.json'}" }
+  |    }).animate({opacity: 1})

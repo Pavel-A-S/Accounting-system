@@ -1,0 +1,31 @@
+- if not @order.blank?
+  h1 = t(:editing_order)
+
+  - if special_access_for_cfo_or_treasurer? @order.state
+    == render 'form2'
+  - else
+    == render 'form'
+  br
+  = link_to t(:show), @order
+  = " | "
+  - if @order.executed?
+    = link_to t(:executed_orders), executed_orders_path
+  - elsif @order.canceled?
+    = link_to t(:canceled_orders), canceled_orders_path
+  - else
+    = link_to t(:current_orders), orders_path
+
+script
+
+  | $("#files").on("change", handle);
+  | function handle() {
+  |   var $files = $('#files')[0].files;
+  |   for (i = 0; i < $files.length; i++) {
+  |     if ($files[i].size > 2097152) {
+  |       alert("#{t(:max_file_size)}");
+  |       $('#files').val('');
+  |       return;
+  |     }
+  |   }
+  | };
+

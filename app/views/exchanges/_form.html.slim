@@ -1,0 +1,52 @@
+- if not @exchange.blank?
+  = form_for @exchange do |f|
+    - if @exchange.errors.any?
+      #error_explanation
+        h2 = "#{t(:you_have_errors)}: #{@exchange.errors.count}"
+        ul
+          - @exchange.errors.full_messages.each do |message|
+            li = message
+    .form-group
+      = f.label :date, t(:record_date)
+      br
+      = f.datetime_select :date, default: DateTime.now, class: "form-control"
+    .form-group
+      = f.label :user_id, t(:initiator)
+      = f.select :user_id, User.pluck(:name, :id), { include_blank: true }, { class: "form-control" }
+    .form-group
+      = f.label :amount_before, t(:amount_before)
+      = f.number_field :amount_before, class: 'form-control', step: 'any', id: 'amount_before'
+      = f.select :from_currency, Exchange.from_currencies.keys.map{ |currency| [t(currency), currency] }, {}, { class: 'form-control' }
+    .form-group
+      = f.label :conversion_rate, t(:conversion_rate)
+      = f.number_field :conversion_rate, class: 'form-control', step: 'any', id: 'conversion_rate'
+      = f.select :conversion_type, Exchange.conversion_types.keys.map{ |c| [t(c), c] }, {}, { class: 'form-control',
+                                                                                              id: 'conversion_type' }
+    .form-group
+      = f.label :amount_after, t(:amount_after)
+      = f.number_field :amount_after, class: 'form-control', step: 'any', id: 'amount_after'
+      = f.select :to_currency, Exchange.to_currencies.keys.map{ |currency| [t(currency), currency] }, {}, { class: 'form-control' }
+    .form-group
+      = f.label :description, t(:exchange_description)
+      = f.text_area :description, class: 'form-control'
+    .form-group
+      = f.label :files, t(:files)
+      = f.file_field :files, id: "files", multiple: true
+      p class="help-block"
+        = t(:files_prompt)
+    - if controller.action_name == 'edit'
+      = files_to_delete(@exchange, :exchange_files, :exchange_file_path)
+
+    = f.submit t(:accept), class: 'btn btn-primary'
+
+
+
+
+
+
+
+
+
+
+
+

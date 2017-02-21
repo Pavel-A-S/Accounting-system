@@ -1,0 +1,38 @@
+- if balances
+    div class='balance-wrapper'
+      div class='balance-header'
+        = t(:balance)
+      div class='balance-body'
+        .table-responsive
+          table.table.table-striped.table-bordered.table-hover
+            thead
+              tr
+                th.text-center
+                  = t(:balance_type_field)
+                - balances.each do |b|
+                  th.text-center
+                    = b[:type]
+            tbody
+              tr
+                td
+                  = t(:balance_income_field)
+                - balances.each do |b|
+                  td.text-right
+                    = number_to_currency(b[:income], unit: b[:type])
+              tr
+                td
+                  = t(:balance_expenditure_field)
+                - balances.each do |b|
+                  td.text-right
+                    = number_to_currency(b[:expenditure], unit: b[:type])
+              tr
+                td
+                  = t(:balance)
+                - balances.each do |b|
+                  - if b[:balance] >= 0
+                    td.plus.text-right
+                      = number_to_currency(b[:balance], unit: b[:type])
+                  - else
+                    td.minus.text-right
+                      = number_to_currency(b[:balance], unit: b[:type])
+

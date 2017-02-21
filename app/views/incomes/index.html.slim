@@ -1,0 +1,45 @@
+- content_for :main_title do
+  div class='main-title-content'
+    = t(:income_sources)
+- if cfo_treasurer_case?
+  = link_to new_income_path, class: 'btn btn-primary' do 
+    span.glyphicon.glyphicon-plus
+    = t(:new_income_source)
+  br
+  br
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover#income-sources-table.no_scroll
+    thead
+      tr
+        th
+          = t(:income_source_name)
+        th
+          = t(:income_source_description)
+        th
+          = t(:income_project)
+        - if cfo_treasurer_case?
+          th
+          th
+    tbody
+      - @incomes.each do | income |
+        tr
+          td.min-width
+            = show_source(income.name, income_path(income.id))
+          td
+            = income.description
+          td
+            = income.project.try(:name)
+          - if cfo_treasurer_case?
+            td
+              = link_to t(:edit), edit_income_path(income) 
+            td
+              = link_to t(:delete), income, method: :delete, data: { confirm: t(:delete_confirmation) }
+script
+
+  |$('#income-sources-table').dataTable({
+  |        "aLengthMenu": [[25, 50, -1], [25, 50, "All"]],
+  |        "iDisplayLength": 25,
+  |        "order": [[0, 'desc']],
+  |        "language": { "url": "#{root_url + '/assets/Russian.json'}" }
+  |    }).animate({opacity: 1});

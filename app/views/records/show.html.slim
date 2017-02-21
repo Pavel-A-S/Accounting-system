@@ -1,0 +1,78 @@
+- if not @record.blank?
+  .panel.panel-default
+    .panel-heading
+      h3.panel-title
+        b = t(:record)
+    .panel-body
+      dl
+        dt
+          = t(:record_type)
+        br
+        dd
+          = t("#{@record.record_type}_key")
+        br
+        dt
+          = t(:record_date)
+        br
+        dd
+          = @record.date.localtime.strftime("%d.%m.%Y %H:%M:%S") rescue ''
+        br
+        dt
+          = t(:record_source_name)
+        br
+        dd
+          = set_source(@record)
+        br
+        dt
+          = t(:ccy)
+        br
+        dd
+          = @record.ccy
+        br
+        dt
+          = t(:amount)
+        br
+        dd
+          = number_to_currency(@record.amount, unit: '')
+        br
+        - if @record.expenditure? || @record.income?
+          dt
+            = t(:project)
+          br
+          dd
+            = show_project(@record)
+          br
+        - if @record.expenditure?
+          dt
+            = t(:expenditure_state)
+          br
+          dd
+            = show_state(@record)
+          br
+        - if @record.expenditure? || @record.exchange?
+          dt
+            = t(:initiator)
+          br
+          dd
+            = set_initiator(@record)
+          br
+        dt
+          = t(:record_description)
+        br
+        dd
+          = @record.description
+        br
+        dt
+          = t(:attached_files)
+        br
+        dd
+          - if @record.exchange?
+            = show_files(@record.exchange, :exchange_files, :exchange_file_path)
+          - else
+            = show_files(@record, :record_files, :record_file_path)
+        br
+        = link_to t(:journal), records_path
+        - if cfo_treasurer_case? && !@record.exchange?
+          = ' | '
+          = link_to t(:edit), edit_record_path(@record)
+

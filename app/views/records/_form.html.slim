@@ -1,0 +1,65 @@
+- if not @record.blank?
+  = form_for @record do |f|
+    - if @record.errors.any?
+      #error_explanation
+        h2 = "#{t(:you_have_errors)}: #{@record.errors.count}"
+        ul
+          - @record.errors.full_messages.each do |message|
+            li = message
+    .form-group
+      = f.label :record_type, t(:record_type)
+      = f.select :record_type, [[t("income_key"), :income], [t("expenditure_key"), :expenditure]], {}, { class: 'form-control', id: 'record_type', onchange: "changeSelect()" }
+    .form-group
+      = f.label :source_id, t(:record_source_name)
+      = f.select :source_id, [], { include_blank: true }, { class: 'form-control', id: 'source_id', onchange: "checkExtraFields()" }
+    .form-group
+      = f.label :date, t(:record_date)
+      br
+      = f.datetime_select :date, default: DateTime.now, class: "form-control"
+    .form-group
+      = f.label :ccy, t(:ccy)
+      = f.select :ccy, Record.ccies.keys.map{ |ccy| [ccy, ccy] }, {}, { class: 'form-control' }
+    .form-group#before-extra-fields
+      = f.label :amount, t(:amount_records)
+      = f.number_field :amount, class: 'form-control', step: 'any'
+    .form-group
+      = f.label :description, t(:record_description)
+      = f.text_area :description, class: 'form-control'
+    .form-group
+      = f.label :files, t(:files)
+      = f.file_field :files, id: "files", multiple: true
+      p class="help-block"
+        = t(:files_prompt)
+    - if controller.action_name == 'edit'
+      = files_to_delete(@record, :record_files, :record_file_path)
+    = f.submit t(:accept), class: 'btn btn-primary'
+
+
+
+      = f.select :project_id, options_for_project, { include_blank: true }, { class: 'form-control' }
+
+
+
+  .form-group#project-id
+    = label_tag :project_id, t(:record_project)
+    = select_tag("record[project_id]",                                         \
+                  options_for_project(@record),                                \
+                  { class: 'form-control', include_blank: true })
+
+
+  .form-group#expenditure-id
+    = label_tag :expenditure_id, t(:record_expenditure)
+    = select_tag("record[expenditure_id]",                                     \
+                  options_for_expenditure_type(@record),                       \
+                  { class: 'form-control', include_blank: true })
+
+  .form-group#user-id
+    = label_tag :user_id, t(:record_user)
+    = select_tag("record[user_id]",                                            \
+                  options_for_user(@record),                                   \
+                  { class: 'form-control', include_blank: true })
+
+  = select_tag(:incomes, options_for_income(@record),                          \
+                          { id: 'income_id', prompt: t(:no_source) })
+  = select_tag(:expenditure, options_for_expenditure(@record),                 \
+                              { id: 'expenditure_id', prompt: t(:no_order) })

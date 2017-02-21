@@ -1,0 +1,30 @@
+- if current_user.admin?
+    = form_for(@event, html: { class: "form-horizontal", role: "form" }) do |f|
+      - if @event.errors.any?
+        .alert.alert-danger.alert-dismissable role="alert"
+          button.close type="button" data-dismiss="alert"
+            span aria-hidden="true"
+              | &times;
+            span.sr-only
+              | Close
+          h4= "#{pluralize(@event.errors.count,"error")} prohibited this event from being saved:"
+          ul
+            - @event.errors.full_messages.each do |msg|
+              li= msg
+      .form-group
+        = f.label :state, class: "col-sm-2 control-label"
+        .col-sm-10
+          /= f.text_area :state, class: "form-control"
+          /= f.select(:state, Order.states.keys.map {|state| [state, state]}) 
+          = f.select(:state, Order.states.keys) 
+      .form-group
+        = f.label :user, class: "col-sm-2 control-label"
+        .col-sm-10
+          = f.text_field :user_id, class: "form-control"
+      .form-group
+        = f.label :order, class: "col-sm-2 control-label"
+        .col-sm-10
+          = f.text_field :order_id, class: "form-control"
+      .form-group
+        .col-sm-offset-2.col-sm-10
+          = f.submit class: "btn btn-primary"

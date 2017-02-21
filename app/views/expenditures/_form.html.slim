@@ -1,0 +1,15 @@
+- if not @expenditure.blank?
+  = form_for @expenditure do |f|
+    - if @expenditure.errors.any?
+      #error_explanation
+        h2 = "#{t(:you_have_errors)}: #{@expenditure.errors.count}"
+        ul
+          - @expenditure.errors.full_messages.each do |message|
+            li = message
+    .form-group
+      = f.label :name, t(:expenditure_name)
+      = f.text_field :name, class: 'form-control'
+    .form-group
+      = f.label :description, t(:expenditure_description)
+      = f.text_area :description, class: 'form-control'
+    = f.submit t(:accept), class: 'btn btn-primary'

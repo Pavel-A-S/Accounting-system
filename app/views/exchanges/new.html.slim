@@ -1,0 +1,94 @@
+- content_for :main_title do
+  div class='main-title-content'
+    = t(:new_exchange)
+div class='panel panel-default'
+  div class='panel-heading'
+    h3 class="panel-title"
+      b = t(:quotations)
+  div class='panel-body text-center'
+    div class='quotation-wrapper'
+      div class='quotation-header'
+      div class='quotation-body'
+        - if @usd && @eur && @chf
+          .table-responsive
+            table.table.table-striped.table-bordered.table-hover
+              thead
+                tr
+                  th.text-center
+                    = t(:code)
+                  th.text-center
+                    = t(:value)
+                  th.text-center
+                    = t(:on_date)
+              tbody
+                tr
+                  td
+                    = t(:usd)
+                  td.text-right
+                    = number_to_currency(@usd.value, unit: '', precision: 4)
+                  td.text-center
+                    = @usd.updated_at.localtime.strftime("%d.%m.%Y")
+                tr
+                  td
+                    = t(:eur)
+                  td.text-right
+                    = number_to_currency(@eur.value, unit: '', precision: 4)
+                  td.text-center
+                    = @eur.updated_at.localtime.strftime("%d.%m.%Y")
+                tr
+                  td
+                    = t(:chf)
+                  td.text-right
+                    = number_to_currency(@chf.value, unit: '', precision: 4)
+                  td.text-center
+                    = @chf.updated_at.localtime.strftime("%d.%m.%Y")
+        - else
+          = t(:no_data)
+== render 'form'
+br
+= link_to t(:back), exchanges_path
+
+script
+  | $('#conversion_type').click(multiply);
+  | $('#amount_before').keyup(multiply);
+  | $('#conversion_rate').keyup(multiply);
+  | function multiply() {
+  |   var $conversion_type = $('#conversion_type').val();
+  |   var $amount_before = $('#amount_before').val();
+  |   var $conversion_rate = $('#conversion_rate').val();
+  |   if ($conversion_type == 'reverse_conversion') {
+  |     if ($conversion_rate != 0) {
+  |       var $amount_after = parseFloat($amount_before/$conversion_rate)
+  |                           .toFixed(2);
+  |     } else {
+  |       var $amount_after = '0.00';
+  |     }
+  |   } else if ($conversion_type == 'direct_conversion') {
+  |     var $amount_after = parseFloat($amount_before*$conversion_rate)
+  |                         .toFixed(2);
+  |   }
+  |   if ($amount_after.length >= 14) {
+  |     $('#amount_after').val('0.00');
+  |   } else {
+  |     $('#amount_after').val($amount_after);
+  |   }
+  | };
+  | $("#files").on("change", handle);
+  | function handle() {
+  |   var $files = $('#files')[0].files;
+  |   for (i = 0; i < $files.length; i++) {
+  |     if ($files[i].size > 2097152) {
+  |       alert("#{t(:max_file_size)}");
+  |       $('#files').val('');
+  |       return;
+  |     }
+  |   }
+  | };
+
+
+
+
+
+
+
+

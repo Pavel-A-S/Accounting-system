@@ -1,0 +1,47 @@
+- if not @exchange.blank?
+  h1 = t(:editing_exchange)
+
+  == render 'form'
+  br
+  = link_to t(:show), @exchange
+  = " | "
+  = link_to t(:exchanges), exchanges_path
+  = ' | '
+  = link_to t(:journal), records_path
+
+script
+  | $('#conversion_type').click(multiply);
+  | $('#amount_before').keyup(multiply);
+  | $('#conversion_rate').keyup(multiply);
+  | function multiply() {
+  |   var $conversion_type = $('#conversion_type').val();
+  |   var $amount_before = $('#amount_before').val();
+  |   var $conversion_rate = $('#conversion_rate').val();
+  |   if ($conversion_type == 'reverse_conversion') {
+  |     if ($conversion_rate != 0) {
+  |       var $amount_after = parseFloat($amount_before/$conversion_rate)
+  |                           .toFixed(2);
+  |     } else {
+  |       var $amount_after = '0.00';
+  |     }
+  |   } else if ($conversion_type == 'direct_conversion') {
+  |     var $amount_after = parseFloat($amount_before*$conversion_rate)
+  |                         .toFixed(2);
+  |   }
+  |   if ($amount_after.length >= 14) {
+  |     $('#amount_after').val('0.00');
+  |   } else {
+  |     $('#amount_after').val($amount_after);
+  |   }
+  | };
+  | $("#files").on("change", handle);
+  | function handle() {
+  |   var $files = $('#files')[0].files;
+  |   for (i = 0; i < $files.length; i++) {
+  |     if ($files[i].size > 2097152) {
+  |       alert("#{t(:max_file_size)}");
+  |       $('#files').val('');
+  |       return;
+  |     }
+  |   }
+  | };

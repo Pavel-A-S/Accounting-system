@@ -1,0 +1,8 @@
+- if not @expenditure.blank?
+  h1 = t(:editing_expenditure)
+
+  == render 'form'
+  br
+  = link_to t(:show), @expenditure
+  = " | "
+  = link_to t(:back), expenditures_path

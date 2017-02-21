@@ -1,0 +1,24 @@
+- if not @expenditure.blank?
+  .panel.panel-default
+    .panel-heading
+      h3.panel-title
+        b = t(:expenditure)
+    .panel-body
+      dl
+        dt
+          = t(:expenditure_name)
+        br
+        dd
+          = @expenditure.name
+        br
+        dt
+          = t(:expenditure_description) + ': '
+        br
+        dd
+          = @expenditure.description
+        br
+        = link_to t(:back), expenditures_path
+        - if cfo_treasurer_case?
+          = ' | '
+          = link_to t(:edit), edit_expenditure_path(@expenditure)
+

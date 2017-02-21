@@ -1,0 +1,56 @@
+- content_for :main_title do
+  div class='main-title-content'
+    = t(:exchanges)
+- if cfo_treasurer_case?
+  = link_to new_exchange_path, class: 'btn btn-primary' do 
+    span.glyphicon.glyphicon-plus
+    = t(:new_exchange)
+  br
+  br
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover#exchanges-table.no_scroll
+    thead
+      tr
+        th
+          = t(:exchange_date)
+        th
+          = t(:amount_before)
+        th
+          = t(:conversion_rate)
+        th
+          = t(:amount_after)
+        th
+          = t(:initiator)
+        - if cfo_treasurer_case?
+          th
+          th
+    tbody
+      - @exchanges.each do | exchange |
+        tr
+          td data-order="#{exchange.date}"
+            = set_date(exchange.date, exchange_path(exchange.id))
+          td.text-right.no_wrap
+            = number_to_currency(exchange.amount_before,                       \
+                                  unit: t(exchange.from_currency))
+          td.text-right.no_wrap
+            = number_to_currency(exchange.conversion_rate, unit: '',           \
+                                                            precision: 4)
+          td.text-right.no_wrap
+            = number_to_currency(exchange.amount_after,                        \
+                                  unit: t(exchange.to_currency))
+          td
+            = exchange.user.try(:name)
+          - if cfo_treasurer_case?
+            td
+              = link_to t(:edit), edit_exchange_path(exchange)
+            td
+              = link_to t(:delete), exchange, method: :delete, data: { confirm: t(:delete_confirmation) }
+script
+
+  |$('#exchanges-table').dataTable({
+  |        "aLengthMenu": [[25, 50, -1], [25, 50, "All"]],
+  |        "iDisplayLength": 25,
+  |        "order": [[0, 'desc']],
+  |        "language": { "url": "#{root_url + '/assets/Russian.json'}" }
+  |    }).animate({opacity: 1});

@@ -1,0 +1,262 @@
+ru:
+  activerecord:
+    attributes:
+      user: 
+        name: "Имя"
+        email: "Почта"
+        password: "Пароль"
+        password_confirmation: "Подтверждение пароля"
+      event:
+        note: "Примечание"
+        user_id: "ID Пользователя"
+      order:
+        subject: 'Описание'
+        ccy: 'CCY'
+        amount: 'Сумма'
+      project:
+        name: 'Название'
+        description: 'Описание'
+      expenditure:
+        name: 'Название'
+        description: 'Описание'
+      income:
+        name: 'Название'
+        description: 'Описание'
+      record:
+        record_type: 'Тип'
+        source_id: 'Источник'
+        date: 'Дата'
+        ccy: 'CCY'
+        amount: 'Сумма'
+        description: 'Описание'
+      exchange:
+        amount_before: 'Сумма исходной валюты'
+        conversion_rate: 'Курс конвертации'
+        amount_after: 'Сумма конечной валюты'
+        description: 'Описание'
+
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: "- нужно указать."
+              too_long:
+                other: "- 48 символов максимум"
+            email:
+              blank: "- нужно указать."
+              too_long: "- очень длинный."
+              invalid: "- что-то с ней не так."
+              taken: "- уже существует в системе."
+            password:
+              blank: "- нужно указать."
+              too_short:
+                other: "- должно быть не меньше 8 символов."
+            password_confirmation:
+              confirmation: "- должно совпадать с паролем."
+        event:
+          attributes:
+            note:
+              blank: "- нужно указать."
+            user_id:
+              blank: "- нужно указать."
+        order:
+          attributes:
+            subject:
+              blank: "- нужно указать."
+            amount:
+              blank: "- нужно указать."
+              not_a_number: "- нужно указать (проверьте значение)."
+              less_than: "- должна быть меньше"
+              greater_than: "- должна быть больше 0"
+        project:
+          attributes:
+            name:
+              blank: "- нужно указать."
+            description:
+              blank: "- нужно указать."
+        expenditure:
+          attributes:
+            name:
+              blank: "- нужно указать."
+            description:
+              blank: "- нужно указать."
+        income:
+          attributes:
+            name:
+              blank: "- нужно указать."
+            description:
+              blank: "- нужно указать."
+        record:
+          attributes:
+            record_type:
+              blank: "- нужно указать."
+            source_id:
+              blank: "- нужно указать."
+            date:
+              blank: "- нужно указать."
+            ccy:
+              blank: "- нужно указать."
+            amount:
+              blank: "- нужно указать."
+              not_a_number: "- нужно указать (проверьте значение)."
+              less_than: "- должна быть меньше"
+              greater_than: "- должна быть больше"
+            description:
+              blank: "- нужно указать."
+        exchange:
+          attributes:
+            amount_before:
+              blank: "- нужно указать."
+              not_a_number: "- нужно указать (проверьте значение)."
+              less_than: "- должна быть меньше"
+              greater_than: "- должна быть больше"
+            amount_after:
+              blank: "- нужно указать."
+              not_a_number: "- нужно указать (проверьте значение)."
+              less_than: "- должна быть меньше"
+              greater_than: "- должна быть больше"
+            conversion_rate:
+              blank: "- нужно указать."
+              not_a_number: "- нужно указать (проверьте значение)."
+              less_than: "- должен быть меньше"
+              greater_than: "- должен быть больше"
+            exchange_description:
+              blank: "- нужно указать."
+
+      messages:
+        record_invalid: "данные не прошли валидацию"
+en:
+  activerecord:
+    attributes:
+      user: 
+        name: "Name"
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+      event:
+        note: "Note"
+        user_id: "ID Пользователя"
+      order:
+        subject: 'Subject'
+        ccy: 'CCY'
+        amount: 'Amount'
+      project:
+        name: 'Name'
+        description: 'Description'
+      expenditure:
+        name: 'Name'
+        description: 'Description'
+      income:
+        name: 'Name'
+        description: 'Description'
+      record:
+        record_type: 'Source type'
+        source_id: 'Source'
+        date: 'Date'
+        ccy: 'CCY'
+        amount: 'Amount'
+        description: 'Description'
+      exchange:
+        amount_before: 'Amount'
+        amount_after: 'Amount after conversion'
+        conversion_rate: 'Conversion rate'
+        description: 'Description'
+
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: "must be present."
+              too_long:
+                other: "too long - 48 symbols maximum."
+            email:
+              blank: "must be present."
+              too_long: "unnecessarily long."
+              invalid: "looks wrong!"
+              taken: "- has been registered before."
+            password:
+              blank: "must be present."
+              too_short:
+                other: "must not be less than 8 symbols."
+            password_confirmation:
+              confirmation: "wrong."
+        event:
+          attributes:
+            note:
+              blank: "must be present."
+            user_id:
+              blank: "must be present."
+        order:
+          attributes:
+            subject:
+              blank: "must be present."
+            amount:
+              blank: "must be present."
+              not_a_number: "must be present. (check value)."
+              less_than: "must be less"
+              greater_than: "must be more than 0"
+        project:
+          attributes:
+            name:
+              blank: "must be present."
+            description:
+              blank: "must be present."
+        expenditure:
+          attributes:
+            name:
+              blank: "must be present."
+            description:
+              blank: "must be present."
+        income:
+          attributes:
+            name:
+              blank: "must be present."
+            description:
+              blank: "must be present."
+        record:
+          attributes:
+            record_type:
+              blank: "must be present."
+            source_id:
+              blank: "must be present."
+            date:
+              blank: "must be present."
+            ccy:
+              blank: "must be present."
+            amount:
+              blank: "must be present."
+              not_a_number: "must be present. (check value)."
+              less_than: "must be less"
+              greater_than: "must be more"
+            description:
+              blank: "must be present."
+        exchange:
+          attributes:
+            amount_before:
+              blank: "must be present."
+              not_a_number: "must be present. (check value)."
+              less_than: "must be less"
+              greater_than: "must be more"
+            amount_after:
+              blank: "must be present."
+              not_a_number: "must be present. (check value)."
+              less_than: "must be less"
+              greater_than: "must be more"
+            conversion_rate:
+              blank: "must be present."
+              not_a_number: "must be present. (check value)."
+              less_than: "must be less"
+              greater_than: "must be more"
+            exchange_description:
+              blank: "must be present."
+
+          messages:
+            record_invalid: "data isn't valid"
+
+
+
+
+
+

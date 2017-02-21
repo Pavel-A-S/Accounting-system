@@ -1,0 +1,376 @@
+en:
+  email: 'Email'
+  password: 'Password'
+  sign_in: 'Sign in'
+  user_name: 'Name'
+  initiator: 'Initiator'
+  amount: 'Amount'
+  state: 'State'
+  ccy: 'CCY'
+  purpose: 'Purpose'
+  new_order: 'New Order'
+  subject: 'Subject'
+  order: 'Order'
+  note: 'Note'
+  created_at: 'Created at'
+  back: 'Back'
+  show: 'Show'
+  accept: 'OK'
+  home: 'Home'
+  exit: 'Exit'
+  about: 'About'
+  sign_up: 'Sign up'
+  remember_me: 'Remember me'
+  forgot_password: 'Forgot password?'
+  editing_order: 'Editing order'
+  edit: 'Edit'
+  order_state_changed: 'Your order state was changed'
+  follow_link: 'To view it please follow this link:'
+  new_event_subject: 'From merriment: order state was changed'
+  your_order: 'Your order'
+  you_have_errors: 'Errors'
+  not_allowed: "You cann't do it"
+  order_was_updated: 'Order was successfully updated'
+  order_was_created: 'Order was successfully created'
+  yep: 'Yes'
+  nope: 'No'
+  exit_confirmation: 'Are you sure you want to exit?'
+  plutus: 'Plutus'
+  preparation: "Preparation"
+  verification: "Verification"
+  approval: "Approval"
+  execution: "Execution"
+  executed: "Executed"
+  canceled: "Canceled"
+  note_must_be_present: "Note must be present"
+  recipient: "Recipient"
+  recipient_field: "Please select a recipient"
+  save: "Save"
+  cancel: "Cancel"
+  change_state: "Change state?"
+  state_was_changed: "Order status was successfully changed"
+  projects: 'Projects'
+  project_name: 'Name'
+  project_description: 'Description'
+  new_project: 'New project'
+  project: 'Project'
+  editing_project: 'Editing project'
+  delete: 'Delete'
+  delete_confirmation: 'Are you sure?'
+  related_project: 'Related project (please fill if you know)'
+  no_project: 'No project'
+  order_was_deleted: 'Order was deleted'
+  project_was_deleted: 'Project was successfully destroyed.'
+  project_was_created: 'Project was successfully created.'
+  project_was_updated: 'Project was successfully updated.'
+  project_was_not_deleted: "Project wasn't destroyed."
+  expenditures: 'Expenditures'
+  expenditure_name: 'Name'
+  expenditure_description: 'Description'
+  new_expenditure: 'New expenditure'
+  expenditure: 'Expenditure'
+  editing_expenditure: 'Editing expenditure'
+  related_expenditure: 'Related expenditure (please fill if you know)'
+  no_expenditure: 'No expenditure'
+  expenditure_was_deleted: 'Expenditure was successfully destroyed.'
+  expenditure_was_created: 'Expenditure was successfully created.'
+  expenditure_was_updated: 'Expenditure was successfully updated.'
+  expenditure_was_not_deleted: "Expenditure wasn't destroyed."
+  income_sources: 'Income sources'
+  income_source_name: 'Name'
+  income_source_description: 'Description'
+  new_income_source: 'New income source'
+  income_source: 'Income source'
+  editing_income_source: 'Editing income source'
+  no_income_source: 'No income source'
+  income_source_was_deleted: 'Income source was successfully destroyed.'
+  income_source_was_created: 'Income source was successfully created.'
+  income_source_was_updated: 'Income source was successfully updated.'
+  income_source_was_not_deleted: "Income source wasn't destroyed."
+  journal: 'Journal'
+  record_name: 'Name'
+  record_description: 'Description'
+  new_record: 'New record'
+  record: 'Record'
+  editing_record: 'Editing record'
+  record_type: 'Record type'
+  record_source_name: 'Source name'
+  no_record: 'No record'
+  record_was_deleted: 'Record was successfully destroyed.'
+  record_was_created: 'Record was successfully created.'
+  record_was_updated: 'Record was successfully updated.'
+  record_was_not_deleted: "Record wasn't destroyed."
+  record_date: 'Date '
+  added_by_default: 'Added by default'
+  not_counted: 'No data. Check quotations'
+  usd: 'USD'
+  eur: 'EUR'
+  chf: 'CHF'
+  no_data: 'No data'
+  quotations: 'Quotations'
+  balance: 'Balance'
+  analytics: 'Analytics'
+  incomes: 'Incomes'
+  code: 'Code'
+  value: 'Value'
+  on_date: 'On date'
+  balance_type_field: 'Type'
+  balance_value_field: 'Value'
+  balance_income_field: 'Income'
+  balance_expenditure_field: 'Expenditure'
+  current_orders: 'Current orders'
+  executed_orders: 'Executed orders'
+  canceled_orders: 'Canceled orders'
+  income_key: 'By income source'
+  expenditure_key: 'By order'
+  exchange_key: 'Exchange currency'
+  amount_records: 'Amount (Can be negative)'
+  expenditure_state: 'State'
+  handled: "Don't check amount"
+  handled_field_status: "Disable amount verification"
+  amount_checker: "Amount verification"
+  amount_checker_disabled: "Disabled"
+  amount_checker_enabled: "Enabled"
+  exchanges: 'Currency exchange'
+
+  from_currency: 'From currency'
+  to_currency: 'To currency'
+
+  amount_before: 'Amount'
+  amount_after: 'Amount after conversion'
+  conversion_rate: 'Conversion rate'
+  exchange_description: 'Description'
+  new_exchange: 'New exchange'
+  exchange: 'Exchange'
+  editing_exchange: 'Editing exchange'
+  no_exchange: 'No exchange'
+  exchange_was_deleted: 'Exchange was successfully destroyed.'
+  exchange_was_created: 'Exchange was successfully created.'
+  exchange_was_updated: 'Exchange was successfully updated.'
+  exchange_was_not_deleted: "Exchange wasn't destroyed."
+  from_RUR: 'RUR'
+  from_USD: 'USD'
+  from_EUR: 'EUR'
+  from_CHF: 'CHF'
+  to_RUR: 'RUR'
+  to_USD: 'USD'
+  to_EUR: 'EUR'
+  to_CHF: 'CHF'
+  exchange_date: 'Date'
+  send_to_journal: 'Send to journal'
+  order_was_sent: 'Order was successfully added to journal'
+  file: 'File'
+  files: 'Files'
+  files_prompt: 'Please add documents if necessary'
+  attached_files: 'Attached files'
+  no_file: "File doesn't exist"
+  no_files: "No files"
+  file_was_deleted: "File was successfully destroyed."
+  file_was_not_deleted: "File wasn't destroyed."
+  max_file_size: "File must be less than 2MB"
+  order_payments: "Executed payments"
+  no_order_payments: "No executed payments"
+  order_was_withdrawn: "Order was withdrawn successfully"
+  withdraw: "Withdraw"
+  withdrawn: "Order was withdrawn"
+  order_state_was_not_changed: "Order state wasn't changed"
+  no_order: "Without an order"
+  no_source: "Without a source"
+
+  record_project: "Related project (please fill if it necessary)"
+  record_expenditure: "Related expenditure (please fill if it necessary)"
+  record_user: "Related user (please fill if it necessary)"
+
+  income_project: "Related project (please fill if it necessary)"
+  #  copy_button: "copy"
+  reverse_conversion: "Reverse conversion"
+  direct_conversion: "Direct conversion"
+
+ru:
+  email: 'Почта'
+  password: 'Пароль'
+  sign_in: 'Войти'
+  user_name: 'Находится у'
+  initiator: 'Инициатор'
+  amount: 'Сумма'
+  state: 'Состояние'
+  ccy: 'CCY'
+  purpose: 'Назначение'
+  new_order: ' Новая заявка'
+  subject: 'Описание'
+  order: 'Заявка'
+  note: 'Замечание'
+  created_at: 'Создано'
+  back: 'Назад'
+  show: 'Показать'
+  accept: 'Применить'
+  home: 'Домой'
+  exit: 'Выйти'
+  about: 'Информация'
+  sign_up: 'Регистрация'
+  remember_me: 'Запомнить меня'
+  forgot_password: 'Забыли пароль?'
+  editing_order: 'Изменение заявки'
+  edit: 'Редактировать'
+  order_state_changed: 'Состояние заявки было изменено'
+  follow_link: 'Пройдите по ссылке, чтобы увидеть изменения:'
+  new_event_subject: 'От системы согласования: состояние заявки было изменено'
+  your_order: 'Ваша заявка'
+  you_have_errors: 'Ошибок'
+  not_allowed: 'Вы не можете так делать'
+  order_was_updated: 'Заявка была успешно обновлена'
+  order_was_created: 'Заявка была успешно создана'
+  yep: 'Да'
+  nope: 'Нет'
+  exit_confirmation: 'Вы действительно хотите выйти?'
+  plutus: 'Plutus'
+  preparation: "На подготовку"
+  verification: "На согласование"
+  approval: "На утверждение"
+  execution: "На исполнение"
+  executed: "Выполнено"
+  canceled: "Отменить"
+  note_must_be_present: "Комментарий - обязателен"
+  recipient: "Получатель"
+  recipient_field: "Выберите получателя"
+  save: "Сохранить"
+  cancel: "Отмена"
+  change_state: "Сохранить статус заявки?"
+  state_was_changed: "Статус заявки был изменён"
+  projects: 'Справочник проектов'
+  project_name: 'Название'
+  project_description: 'Описание'
+  new_project: ' Новый проект'
+  project: 'Проект'
+  editing_project: 'Изменение проекта'
+  delete: 'Удалить'
+  delete_confirmation: 'Вы уверены?'
+  related_project: 'Проект в рамках которого выделяется сумма (укажите название, если знаете)'
+  no_project: 'Без проекта'
+  order_was_deleted: 'Заказ был удалён'
+  project_was_deleted: 'Проект был успешно удалён'
+  project_was_created: 'Проект был успешно создан'
+  project_was_updated: 'Проект был успешно обновлён'
+  project_was_not_deleted: 'Проект не был удалён'
+  expenditures: 'Справочник статей'
+  expenditure_name: 'Название'
+  expenditure_description: 'Описание'
+  new_expenditure: ' Новая статья расходов'
+  expenditure: 'Статья расходов'
+  editing_expenditure: 'Изменение статьи расходов'
+  related_expenditure: 'Статья расходов в рамках которой выделяется сумма (укажите название, если знаете)'
+  no_expenditure: 'Без статьи'
+  expenditure_was_deleted: 'Статья расходов была успешно удалена'
+  expenditure_was_created: 'Статья расходов была успешно создана'
+  expenditure_was_updated: 'Статья расходов была успешно обновлена'
+  expenditure_was_not_deleted: 'Статья расходов не была удалена'
+  income_sources: 'Источники финансирования'
+  income_source_name: 'Название'
+  income_source_description: 'Описание'
+  new_income_source: ' Новый источник финансирования'
+  income_source: 'Источник финансирования'
+  editing_income_source: 'Изменение источника финансирования'
+  no_income_source: 'Без источника финансирования'
+  income_source_was_deleted: 'Источник финансирования был успешно удалён'
+  income_source_was_created: 'Источник финансирования был успешно создан'
+  income_source_was_updated: 'Источник финансирования был успешно обновлён'
+  income_source_was_not_deleted: "Источник финансирования не был удалён"
+  journal: 'Рабочая книга'
+  record_name: 'Название'
+  record_description: 'Описание'
+  new_record: ' Новая запись'
+  record: 'Запись'
+  editing_record: 'Изменение записи'
+  record_type: 'Движение средств'
+  record_source_name: 'Назначение'
+  no_record: 'Без записи'
+  record_was_deleted: 'Запись была успешно удалена'
+  record_was_created: 'Запись была успешно создана'
+  record_was_updated: 'Запись была успешно обновлена'
+  record_was_not_deleted: 'Запись не была удалена'
+  record_date: 'Дата'
+  added_by_default: 'Добавлено автоматически'
+  not_counted: 'Нет данных. Возможно, отсутствуют котировки.'
+  usd: 'USD'
+  eur: 'EUR'
+  chf: 'CHF'
+  no_data: 'Нет данных'
+  quotations: 'Котировки'
+  balance: 'Баланс'
+  analytics: 'Аналитика'
+  incomes: 'Доходы'
+  code: 'Код'
+  value: 'Значение'
+  on_date: 'Дата'
+  balance_type_field: 'Тип'
+  balance_value_field: 'Значение'
+  balance_income_field: 'Приход'
+  balance_expenditure_field: 'Расход'
+  current_orders: 'Текущие заявки'
+  executed_orders: 'Исполненные заявки'
+  canceled_orders: 'Отменённые заявки'
+  income_key: 'По источнику финансирования'
+  expenditure_key: 'По заявке'
+  exchange_key: 'Конвертация валюты'
+  amount_records: 'Сумма (может принимать отрицательные значения)'
+  expenditure_state: 'Статья'
+  handled: "Не проверять сумму"
+  amount_checker: "Проверка суммы"
+  amount_checker_disabled: "Отключена"
+  amount_checker_enabled: "Включена"
+  exchanges: 'Конвертация валют'
+
+  from_currency: 'Исходная валюта'
+  to_currency: 'Конечная валюта'
+
+  amount_before: 'Выдано'
+  conversion_rate: 'Курс конвертации'
+  amount_after: 'Получено'
+  exchange_description: 'Описание'
+  new_exchange: ' Новая запись'
+  exchange: 'Конвертация'
+  editing_exchange: 'Изменение записи'
+  exchange_was_deleted: 'Запись была успешно удалена'
+  exchange_was_created: 'Запись была успешно создана'
+  exchange_was_updated: 'Запись была успешно обновлена'
+  exchange_was_not_deleted: "Запись не была удалена"
+  from_RUR: 'RUR'
+  from_USD: 'USD'
+  from_EUR: 'EUR'
+  from_CHF: 'CHF'
+  to_RUR: 'RUR'
+  to_USD: 'USD'
+  to_EUR: 'EUR'
+  to_CHF: 'CHF'
+  exchange_date: 'Дата'
+  send_to_journal: 'Добавить в рабочую книгу'
+  order_was_sent: 'Заявка была успешно добавлена в рабочую книгу'
+  file: 'Файл'
+  files: 'Файлы'
+  files_prompt: 'Добавьте отсканированные документы, если это необходимо'
+  attached_files: 'Прикреплённые файлы'
+  no_file: "Такой файл не существует"
+  no_files: "Файлов нет"
+  file_was_deleted: 'Файл был успешно удалён'
+  file_was_not_deleted: 'Файл не был удалён'
+  max_file_size: "Файл не должен быть больше 2MB"
+  order_payments: "Движение средств по заявке"
+  no_order_payments: "Нет движения средств по заявке"
+  order_was_withdrawn: "Заявка была успешно отозвана"
+  withdraw: "Отозвать"
+  withdrawn: "Заявка была отозвана"
+  order_state_was_not_changed: "Состояние заявки не было изменено"
+  no_order: "Без заявки"
+  no_source: "Без указания источника"
+
+  record_project: "Проект"
+  record_expenditure: "Статья расходов"
+  record_user: "Инициатор"
+
+  income_project: "Проект"
+  #  copy_button: "копировать"
+  reverse_conversion: "Обратный курс"
+  direct_conversion: "Прямой курс"
+
+
+

@@ -1,0 +1,42 @@
+- content_for :main_title do
+  div class='main-title-content'
+    = t(:expenditures)
+- if cfo_treasurer_case?
+  = link_to new_expenditure_path, class: 'btn btn-primary' do 
+    span.glyphicon.glyphicon-plus
+    = t(:new_expenditure)
+  br
+  br
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover#expenditures-table.no_scroll
+    thead
+      tr
+        th
+          = t(:expenditure_name)
+        th
+          = t(:expenditure_description)
+        - if cfo_treasurer_case?
+          th
+          th
+    tbody
+      - @expenditures.each do | expenditure |
+        tr
+          td
+            = show_source(expenditure.name, expenditure_path(expenditure.id))
+          td
+            = expenditure.description
+          - if cfo_treasurer_case?
+            td
+              = link_to t(:edit), edit_expenditure_path(expenditure) 
+            td
+              = link_to t(:delete), expenditure, method: :delete, data: { confirm: t(:delete_confirmation) }
+
+script
+
+  |$('#expenditures-table').dataTable({
+  |        "aLengthMenu": [[25, 50, -1], [25, 50, "All"]],
+  |        "iDisplayLength": 25,
+  |        "order": [[0, 'desc']],
+  |        "language": { "url": "#{root_url + '/assets/Russian.json'}" }
+  |    }).animate({opacity: 1});

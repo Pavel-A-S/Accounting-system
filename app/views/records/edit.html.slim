@@ -1,0 +1,51 @@
+- if not @record.blank?
+  h1 = t(:editing_record)
+
+  == render 'form'
+  br
+  = link_to t(:show), @record
+  = " | "
+  = link_to t(:back), records_path
+
+script
+  |  $(changeSelect());
+  |  function changeSelect() {
+  |    var $record_type = $('#record_type').val();
+  |    if ($record_type == 'income') {
+  |      $('#source_id').empty();
+  |      $('#income_id > option').clone().appendTo('#source_id');
+  |    } else if ($record_type == 'expenditure') {
+  |      $('#source_id').empty();
+  |      $('#expenditure_id > option').clone().appendTo('#source_id');
+  |    }
+  |    checkExtraFields();
+  |  }
+  |  function checkExtraFields() {
+  |    var $record_type = $('#record_type').val();
+  |    var $source_id = $('#source_id').val();
+  |    $('#project-id-in-form').remove();
+  |    $('#expenditure-id-in-form').remove();
+  |    $('#user-id-in-form').remove();
+  |    if ($record_type == 'income' && $source_id == '') {
+  |      $('#project-id').clone().attr('id','project-id-in-form')
+  |                              .insertAfter('#before-extra-fields');
+  |    } else if ($record_type == 'expenditure' && $source_id == '') {
+  |        $('#project-id').clone().attr('id','project-id-in-form')
+  |                                .insertAfter('#before-extra-fields');
+  |        $('#expenditure-id').clone().attr('id','expenditure-id-in-form')
+  |                                    .insertAfter('#project-id-in-form');
+  |        $('#user-id').clone().attr('id','user-id-in-form')
+  |                             .insertAfter('#expenditure-id-in-form');
+  |    }
+  |  }
+  |  $("#files").on("change", handle);
+  |  function handle() {
+  |    var $files = $('#files')[0].files;
+  |    for (i = 0; i < $files.length; i++) {
+  |      if ($files[i].size > 2097152) {
+  |        alert("#{t(:max_file_size)}");
+  |        $('#files').val('');
+  |        return;
+  |      }
+  |    }
+  |  };

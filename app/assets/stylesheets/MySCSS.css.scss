@@ -1,0 +1,218 @@
+#big_yep {
+  min-width: 20%;
+}
+#big_nope {
+  min-width: 20%;
+}
+#myModal {
+  top: 5%;
+}
+#income_id {
+  display: none;
+}
+#expenditure_id {
+  display: none;
+}
+.simple_link {
+}
+.balance-wrapper {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  padding: 0px 15px 0px 15px;
+}
+.balance-header {
+  font-weight: bold;
+  text-align: center;
+  font-size: 14px;
+  color: gray;
+//  display: none;
+}
+.balance-body {
+  margin-top: 5px;
+  font-size: 14px;
+}
+.quotation-wrapper {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  padding: 0px 15px 0px 15px;
+}
+.quotation-header {
+  font-weight: bold;
+  text-align: center;
+  font-size: 14px;
+  color: gray;
+//  display: none;
+}
+.quotation-body {
+  margin-top: 5px;
+  font-size: 14px;
+}
+.order-payments-wrapper {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  padding: 0px 15px 0px 15px;
+}
+.order-payments-header {
+  font-weight: bold;
+  text-align: center;
+  font-size: 14px;
+  color: black;
+//  display: none;
+}
+.order-payments-body {
+  margin-top: 5px;
+  font-size: 14px;
+}
+.main-text {
+  font-weight: bold;
+}
+
+.simple-text {
+}
+
+.header-title {
+  display: inline-block;
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  color: silver;
+}
+
+.current-user {
+  margin-top: 15px;
+  color: gray;
+}
+
+.exit-link {
+  float: right;
+}
+
+@media(min-width:768px) {
+  .set-min-width {
+    text-align: center;
+    width: 100%;
+  }
+  .mobile-only {
+    display: none;
+  }
+  .desktop-only {
+    display: block;
+  }
+}
+
+@media(max-width:767px) {
+  .set-min-width {
+    text-align: center;
+    width: auto;
+  }
+  .mobile-only {
+    display: block;
+  }
+  .desktop-only {
+    display: none;
+  }
+}
+
+.full-width {
+  margin: 0px;
+  width: 100%;
+}
+
+.set-top-border {
+  margin-top: 5px;
+  padding-top: 20px;
+  border-top: 1px solid gray;
+}
+
+.small-sidebar-link {
+  line-height: 200%;
+  font-size: 15px;
+}
+
+.plus {
+  font-weight: bold;
+  color: green;
+}
+
+.minus {
+  font-weight: bold;
+  color: red;
+}
+
+.neutral {
+  font-weight: bold;
+}
+
+.no_scroll {
+  opacity: 0;
+  width: 99% !important;
+}
+
+.awaiting {
+  color: red;
+  .simple_link {
+    color: red;
+  }
+}
+
+.no_wrap {
+  white-space: nowrap;
+}
+
+.min-width {
+  min-width: 250px;
+}
+
+.small-margin {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.small-width {
+  width: 18px;
+  text-align: center;
+  padding: 8px 5px !important;
+}
+
+.red-asterisk {
+  color: red;
+  font-weight: bold;
+}
+
+.green-plus {
+  color: green;
+  font-weight: bold;
+}
+
+.balance-date {
+  text-align: right;
+  margin: 0px 15px 0px 15px;
+}
+
+.add-margin {
+  margin-left: 15px;
+}
+
+#expenditure-id {
+  display: none;
+}
+
+#project-id {
+  display: none;
+}
+
+#user-id {
+  display: none;
+}
+
+.hidden-text {
+  display: none;
+}
+
+.hr-small {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}

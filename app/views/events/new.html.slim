@@ -1,0 +1,10 @@
+- if current_user.admin?
+    .page-header
+      = link_to events_path, class: 'btn btn-default' do 
+        span.glyphicon.glyphicon-list-alt
+        |  Back 
+      h1
+        | New 
+        | event
+
+    = render 'form'

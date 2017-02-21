@@ -1,0 +1,41 @@
+- content_for :main_title do
+  div class='main-title-content'
+    = t(:projects)
+- if cfo_treasurer_case?
+  = link_to new_project_path, class: 'btn btn-primary' do 
+    span.glyphicon.glyphicon-plus
+    = t(:new_project)
+  br
+  br
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover#projects-table.no_scroll
+    thead
+      tr
+        th
+          = t(:project_name)
+        th
+          = t(:project_description)
+        - if cfo_treasurer_case?
+          th
+          th
+    tbody
+      - @projects.each do | project |
+        tr
+          td
+            = show_source(project.name, project_path(project.id))
+          td
+            = project.description
+          - if cfo_treasurer_case?
+            td
+              = link_to t(:edit), edit_project_path(project)
+            td
+              = link_to t(:delete), project, method: :delete, data: { confirm: t(:delete_confirmation) }
+script
+
+  |$('#projects-table').dataTable({
+  |        "aLengthMenu": [[25, 50, -1], [25, 50, "All"]],
+  |        "iDisplayLength": 25,
+  |        "order": [[0, 'desc']],
+  |        "language": { "url": "#{root_url + '/assets/Russian.json'}" }
+  |    }).animate({opacity: 1});

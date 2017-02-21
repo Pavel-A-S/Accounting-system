@@ -1,0 +1,8 @@
+- if order
+  hr.hr-small
+  textarea id="copy_#{order.id}_text" class="hidden-text"
+    = order.subject
+  div.text-right
+    = button_tag type: 'button', id: "copy_#{order.id}",
+                                  class: "btn btn-xs btn-primary copy-button" do
+      span.glyphicon.glyphicon-copy.copy-button-glyphicon aria-hidden="true"

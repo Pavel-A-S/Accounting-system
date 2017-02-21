@@ -1,0 +1,84 @@
+- content_for :main_title do
+  div class='main-title-content'
+    = t(:journal)
+
+div class='panel panel-default'
+  div class='panel-heading'
+    = t(:analytics)
+  div class='panel-body'
+    - if @balances
+      = render partial: 'balance', locals: { balances: @balances }
+      div.balance-date
+        = form_tag(records_path, method: :get)
+          = select_date((@date or Date.current))
+          = submit_tag t(:accept), class: 'btn btn-primary add-margin'
+
+- if cfo_treasurer_case?
+  = link_to new_record_path, class: 'btn btn-primary' do
+    span.glyphicon.glyphicon-plus
+    = t(:new_record)
+  br
+  br
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover#records-table.no_scroll
+    thead
+      tr
+        th
+          = t(:record_date)
+        th
+          = t(:record_source_name)
+        th
+          = t(:project)
+        th
+          = t(:expenditure_state)
+        th
+          = t(:ccy)
+        th
+          = t(:amount)
+        th
+          = t(:initiator)
+        - if cfo_treasurer_case?
+          th
+          th
+    tbody
+      - @records.each do | record |
+        tr
+          td data-order="#{record.date}"
+            = set_date(record.date, record_path(record.id))
+          - if set_record_color?(record)
+            td.awaiting
+              = set_source(record)
+          - else
+            td
+              = set_source(record)
+          td
+            = show_project(record)
+          td
+            = show_state(record)
+          td
+            = record.ccy
+          - if record.amount >= 0
+            td.plus.text-right.no_wrap
+              = number_to_currency(round_it(record.amount), unit: '',          \
+                                                            precision: 0)
+          - else
+            td.text-right.no_wrap
+              = number_to_currency(round_it(record.amount), unit: '',          \
+                                                            precision: 0)
+          td
+            = set_initiator(record)
+          - if cfo_treasurer_case?
+            td
+              = link_to t(:edit), edit_record_path(record) if !record.exchange? 
+            td
+              = link_to t(:delete), record, method: :delete, data: { confirm: t(:delete_confirmation) } if !record.exchange?
+
+script
+
+  |$('#records-table').dataTable({
+  |        "aLengthMenu": [[25, 50, -1], [25, 50, "All"]],
+  |        "iDisplayLength": 25,
+  |        "order": [[0, 'desc']],
+  |        "language": { "url": "#{root_url + '/assets/Russian.json'}" }
+  |    }).animate({opacity: 1});

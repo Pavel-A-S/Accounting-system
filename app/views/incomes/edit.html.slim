@@ -1,0 +1,8 @@
+- if not @income.blank?
+  h1 = t(:editing_income_source)
+
+  == render 'form'
+  br
+  = link_to t(:show), @income
+  = " | "
+  = link_to t(:back), incomes_path

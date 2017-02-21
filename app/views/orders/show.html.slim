@@ -1,0 +1,107 @@
+/  p#notice = notice
+- if not @order.blank?
+  .panel.panel-default
+    .panel-heading
+      h3.panel-title
+        b = t(:order)
+    .panel-body
+      dl
+        dt
+          = t(:subject)
+        br
+        dd
+          = @order.subject
+        br
+        dt
+          = t(:project)
+        br
+        dd
+          = @order.project.try(:name) or t(:no_project)
+        br
+        dt
+          = t(:expenditure)
+        br
+        dd
+          = @order.expenditure.try(:name) or t(:no_expenditure)
+        br
+        dt
+          = t(:amount)
+        br
+        dd
+          = "#{number_to_currency(@order.amount, unit: '',                     \
+                                                 precision: 0)} #{@order.ccy}"
+        br
+        dt
+          = t(:attached_files)
+        br
+        dd
+          = show_files(@order, :order_files, :order_file_path)
+        br
+        - if @order.executed? && can_see_as_auditor_cfo_treasurer?
+          dt
+            = t(:amount_checker)
+          br
+          dd
+            = amount_checker_state(@order.handled?)
+          br
+        - if records = order_get_records(@order)
+          = render partial: 'order_payments', locals: { records: records }
+        - else
+          dt
+            = t(:order_payments)
+          br
+          dd
+            = t(:no_order_payments)
+          br
+        - if @order.executed?
+          = link_to t(:executed_orders), executed_orders_path
+        - elsif @order.canceled?
+          = link_to t(:canceled_orders), canceled_orders_path
+        - else
+          = link_to t(:current_orders), orders_path
+
+        - if can_see_as_auditor_cfo_treasurer?
+          = ' | '
+          = link_to t(:journal), records_path
+
+        - if can_he_edit? @order
+          = ' | '
+          = link_to t(:edit), edit_order_path(@order)
+
+  - if not @order.events.blank? 
+    .table-responsive
+      table.table.table-striped.table-bordered.table-hover
+        thead
+          tr
+            th.text-center
+              = t(:state)
+            th.text-center
+              = t(:user_name)
+            th.text-center
+              = t(:created_at)
+            th.text-center
+              = t(:note)
+        tbody
+          tr
+            td
+              = :preparation rescue "Can't get it"
+            td
+              = @order.user.name rescue "Can't get it"
+            td
+              = @order.created_at.localtime                                    \
+                      .strftime("%d.%m.%Y %H:%M:%S") rescue "Can't get it"
+            td
+              = ""
+          - @order.events.order('created_at').each do |event|
+            tr
+              td
+                = event.state rescue "Can't get it"
+              td
+                = event.user.name rescue "Can't get it"
+              td
+                = event.created_at.localtime                                   \
+                        .strftime("%d.%m.%Y %H:%M:%S") rescue "Can't get it"
+              td
+                = event.note rescue "Can't get it"
+
+

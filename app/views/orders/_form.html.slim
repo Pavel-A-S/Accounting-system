@@ -1,0 +1,33 @@
+- if not @order.blank?
+    = form_for @order do |f|
+      - if @order.errors.any?
+        #error_explanation
+          h2 = "#{t(:you_have_errors)}: #{@order.errors.count}"
+          ul
+            - @order.errors.full_messages.each do |message|
+              li = message
+
+      .form-group
+        = f.label :subject, t(:subject)
+        = f.text_area :subject, class: 'form-control', rows: 6
+      .form-group
+        = f.label :ccy, t(:ccy)
+        = f.select :ccy, Order.ccys.keys.map{ |ccy| [ccy, ccy] }, {}, { class: 'form-control' }
+      .form-group
+        = f.label :amount, t(:amount)
+        = f.number_field :amount, class: 'form-control'
+      .form-group
+        = f.label :project_id, t(:related_project)
+        = f.select :project_id, Project.all.collect { |project| [project.name, project.id] }, { include_blank: true }, { class: 'form-control' }
+      .form-group
+        = f.label :expenditure_id, t(:related_expenditure)
+        = f.select :expenditure_id, Expenditure.all.collect { |expenditure| [expenditure.name, expenditure.id] }, { include_blank: true }, { class: 'form-control' }
+      .form-group
+        = f.label :files, t(:files)
+        = f.file_field :files, id: "files", multiple: true
+        p class="help-block"
+          = t(:files_prompt)
+      - if controller.action_name == 'edit'
+        = files_to_delete(@order, :order_files, :order_file_path)
+
+      = f.submit t(:accept), class: 'btn btn-primary'

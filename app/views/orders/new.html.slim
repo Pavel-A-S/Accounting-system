@@ -1,0 +1,19 @@
+h1 = t(:new_order)
+
+== render 'form'
+br
+= link_to t(:back), orders_path
+
+script
+
+  | $("#files").on("change", handle);
+  | function handle() {
+  |   var $files = $('#files')[0].files;
+  |   for (i = 0; i < $files.length; i++) {
+  |     if ($files[i].size > 2097152) {
+  |       alert("#{t(:max_file_size)}");
+  |       $('#files').val('');
+  |       return;
+  |     }
+  |   }
+  | };

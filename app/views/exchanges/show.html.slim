@@ -1,0 +1,61 @@
+- if not @exchange.blank?
+  .panel.panel-default
+    .panel-heading
+      h3.panel-title
+        b = t(:exchange)
+    .panel-body
+      dl
+        dt
+          = t(:record_date)
+        br
+        dd
+          = @exchange.date.localtime.strftime("%d.%m.%Y %H:%M:%S") rescue ''
+        br
+        dt
+          = t(:amount_before)
+        br
+        dd
+          = number_to_currency(@exchange.amount_before,                        \
+                                unit: t(@exchange.from_currency))
+        br
+        dt
+          = t(:conversion_rate)
+        br
+        dd
+          - if @exchange.direct_conversion?
+            = number_to_currency(@exchange.conversion_rate, unit: '')
+          - elsif @exchange.reverse_conversion?
+            = "1 / #{number_to_currency(@exchange.conversion_rate, unit: '')}"
+        br
+        dt
+          = t(:amount_after)
+        br
+        dd
+          = number_to_currency(@exchange.amount_after,                         \
+                                unit: t(@exchange.to_currency))
+        br
+        dt
+          = t(:initiator)
+        br
+        dd
+          = @exchange.user.try(:name)
+        br
+        dt
+          = t(:exchange_description)
+        br
+        dd
+          = @exchange.description
+        br
+        dt
+          = t(:attached_files)
+        br
+        dd
+          = show_files(@exchange, :exchange_files, :exchange_file_path)
+        br
+        = link_to t(:exchanges), exchanges_path
+        = ' | '
+        = link_to t(:journal), records_path
+        - if cfo_treasurer_case?
+          = ' | '
+          = link_to t(:edit), edit_exchange_path(@exchange)
+

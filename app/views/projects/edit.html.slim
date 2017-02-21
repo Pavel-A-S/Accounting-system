@@ -1,0 +1,8 @@
+- if not @project.blank?
+  h1 = t(:editing_project)
+
+  == render 'form'
+  br
+  = link_to t(:show), @project
+  = " | "
+  = link_to t(:back), projects_path
